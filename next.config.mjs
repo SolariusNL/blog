@@ -5,6 +5,7 @@ import remarkToc from "remark-toc";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+  distDir: "out",
 };
 
 const withMDX = createMDX({
