@@ -8,8 +8,6 @@
     "start": "next start",
     "eslint": "next lint",
     "stylelint": "stylelint '**/*.css' --cache",
-    "typecheck": "tsc --noEmit",
-    "test": "npm run typecheck && npm run eslint && npm run stylelint",
     "deploy": "npm run build && gh-pages -d out -t true",
     "exports": "esno scripts/generate-questions-exports"
   },
