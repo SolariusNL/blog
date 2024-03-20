@@ -8,7 +8,7 @@
     "start": "next start",
     "eslint": "next lint",
     "stylelint": "stylelint '**/*.css' --cache",
-    "deploy": "npm run build && gh-pages -d out -t true",
+    "deploy": "yarn run build && gh-pages -d out -t true",
     "exports": "esno scripts/generate-questions-exports"
   },
   "dependencies": {

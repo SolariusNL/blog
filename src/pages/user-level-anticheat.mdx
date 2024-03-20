@@ -1,0 +1,79 @@
+import MdxLayout from "@/components/mdx-layout";
+import { Alert } from "@mantine/core";
+import { AreaChart } from "@mantine/charts";
+import { seleneAcData } from "@/data/selene-user-ac";
+
+# User level anticheat
+
+Recently, kernel level anticheat solutions have been gaining a lot of attention because of their [security implications](https://www.reddit.com/r/linux_gaming/comments/14ydvh1/another_argument_against_kernel_level_anticheat/) and privacy concerns. Should we go back to user level anticheat solutions? Can they be effective?
+
+## Kernel vs user level anticheat
+
+First, let's go over the ring levels in the x86 architecture. The x86 architecture has 4 ring levels, ring 0 being the most privileged and ring 3 being the least privileged.
+
+![x86 ring levels](/protectionring.png)
+
+Kernel level anticheat solutions run in ring 0, which means they have full access to the system and can do whatever they want. This is a security concern because if the anticheat software is compromised, the attacker can do whatever they want with the system, including installing rootkits and keyloggers completely undetected.
+
+<Alert title="Platform availability" color="blue" className="mb-4">
+  On Unix-based operating systems like Linux and macOS, the system adheres to a
+  strict separation between kernel space and user space. Applications running in
+  the user space can only communicate to the kernel space through system calls,
+  which are controlled access points to the kernel. This model is called the
+  monolithic kernel model. On the other hand, Windows uses a hybrid kernel
+  model, which allows for more direct communication between the kernel and user
+  space.
+</Alert>
+
+User level anticheat solutions run in ring 3, which means they have limited access to the system. They can't do anything that would compromise the system, but they can still detect and prevent cheating in games to some extent.
+
+## Effectiveness
+
+### Kernel level anticheat
+
+Because of the ability to do virtually anything with the system, kernel level anticheat solutions are seen as the most effective. Operating at the kernel level provides deep visibility into system activity, allowing anti-cheat mechanisms to detect unauthorized modifications or manipulations of game code, memory, and system resources. This level of access enables detection of cheats that operate at a low level, such as aimbots, wallhacks, and memory injection.
+
+Kernel-level anti-cheat solutions can also intercept and filter system calls made by game processes to the operating system to potentially detect memory manipulation or other unauthorized activity.
+
+### User level anticheat
+
+User-level anti-cheat solutions operate within the context of the game application itself, allowing them to monitor game-related activities, such as player movement, actions, and interactions with game objects. This game-specific monitoring enables user-level anti-cheat mechanisms to detect cheating behaviors that directly impact gameplay, such as speed hacks, teleportation, and auto-aim.
+
+To intercept and monitor game activities, user level systems can use DLL injection, hooking, and other techniques to monitor and modify game memory and system resources. These techniques are less invasive and less powerful than those available to kernel-level anti-cheat solutions.
+
+<AreaChart
+  h={300}
+  className="mt-8"
+  data={seleneAcData}
+  dataKey="revision"
+  series={[
+    { name: "Flags", color: "teal.6" },
+    { name: "Punishments", color: "green.6" },
+    { name: "False Positives", color: "red.6" },
+  ]}
+  curveType="linear"
+/>
+
+<small>Selene Anticheat data from December 2023 to February 2024</small>
+
+export default function MDXPage({ children }) {
+  return (
+    <MdxLayout
+      metadata={{
+        title: "User level anticheat",
+        description: "Can user level anticheat be effective?",
+        tags: ["anticheat", "research", "selene"],
+        date: "February 10, 2024",
+        authors: [
+          {
+            name: "Emil Osmicevic",
+            avatarUri: "/emil.png",
+            email: "emil@solarius.me",
+          },
+        ],
+      }}
+    >
+      {children}
+    </MdxLayout>
+  );
+}

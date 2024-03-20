@@ -5,7 +5,16 @@ import remarkToc from "remark-toc";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
-  distDir: "out",
+  reactStrictMode: true,
+  swcMinify: true,
+  output: "export",
+  pageExtensions: ["ts", "tsx", "mdx"],
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  images: {
+    unoptimized: true,
+  },
 };
 
 const withMDX = createMDX({
